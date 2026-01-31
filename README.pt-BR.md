@@ -28,6 +28,8 @@ A [Kobana](https://www.kobana.com.br) é uma plataforma de automação financeir
 | [mcp-charge-pix](./skills/mcp-charge-pix) | Criar e gerenciar cobranças Pix usando o servidor MCP kobana-mcp-charge |
 | [api-transfer-pix](./skills/api-transfer-pix) | Criar e gerenciar transferências Pix usando a API REST da Kobana |
 | [mcp-transfer-pix](./skills/mcp-transfer-pix) | Criar e gerenciar transferências Pix usando o servidor MCP kobana-mcp-transfer |
+| [api-payment-pix](./skills/api-payment-pix) | Pagar cobranças Pix e decodificar QR codes usando a API REST da Kobana |
+| [mcp-payment-pix](./skills/mcp-payment-pix) | Pagar cobranças Pix e decodificar QR codes usando o servidor MCP kobana-mcp-payment |
 
 ## Aviso Legal
 
@@ -45,7 +47,7 @@ A [Kobana](https://www.kobana.com.br) é uma plataforma de automação financeir
 
 Você pode registrar este repositório como um marketplace de plugins do Claude Code executando o seguinte comando:
 ```
-/plugin marketplace add kobana/kobana-agent-skills
+/plugin marketplace add universokobana/kobana-agent-skills
 ```
 
 Então, para instalar as skills da Kobana:
@@ -64,6 +66,8 @@ Após instalar o plugin, você pode usar a skill apenas mencionando-a. Por exemp
 - "Use a skill mcp-charge-pix para listar minhas contas Pix"
 - "Use a skill api-transfer-pix para enviar uma transferência Pix de R$ 500,00"
 - "Use a skill mcp-transfer-pix para criar um lote de transferências"
+- "Use a skill api-payment-pix para pagar um QR code Pix"
+- "Use a skill mcp-payment-pix para decodificar e pagar uma fatura Pix"
 
 ## Claude.ai
 
