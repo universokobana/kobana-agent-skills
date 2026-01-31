@@ -8,7 +8,9 @@ This repository contains Kobana's official skills for financial automation with 
 kobana-skills/
 ├── skills/
 │   ├── api-charge-pix/       # Pix charges via REST API
-│   └── mcp-charge-pix/       # Pix charges via MCP Server
+│   ├── mcp-charge-pix/       # Pix charges via MCP Server
+│   ├── api-transfer-pix/     # Pix transfers via REST API
+│   └── mcp-transfer-pix/     # Pix transfers via MCP Server
 ├── spec/                     # Agent Skills specification
 │   └── kobana-skills-structure.md  # Standard structure for new skills
 └── template/                 # Skill template
@@ -36,6 +38,16 @@ This guide includes:
 - **Purpose**: Create and manage Pix charges using kobana-mcp-charge MCP server
 - **Documentation**: `skills/mcp-charge-pix/SKILL.md`
 - **Full Reference**: `skills/mcp-charge-pix/references/REFERENCE.md`
+
+### api-transfer-pix
+- **Purpose**: Create and manage Pix transfers using Kobana REST API
+- **Documentation**: `skills/api-transfer-pix/SKILL.md`
+- **Full Reference**: `skills/api-transfer-pix/references/REFERENCE.md`
+
+### mcp-transfer-pix
+- **Purpose**: Create and manage Pix transfers using kobana-mcp-transfer MCP server
+- **Documentation**: `skills/mcp-transfer-pix/SKILL.md`
+- **Full Reference**: `skills/mcp-transfer-pix/references/REFERENCE.md`
 
 ## External Documentation
 
@@ -72,6 +84,18 @@ This guide includes:
 - Want simplified tool-based interaction
 - Prefer not to handle HTTP requests directly
 
+### Use api-transfer-pix when:
+- Making direct HTTP calls to Kobana API
+- Sending Pix transfers to suppliers, employees, or partners
+- Need full control over transfer batches and approvals
+- Working without MCP server configured
+
+### Use mcp-transfer-pix when:
+- MCP server is already configured
+- Using Claude Desktop or Claude Code with MCP
+- Want simplified tool-based interaction for transfers
+- Prefer not to handle HTTP requests directly
+
 ## Authentication
 
 Both skills require a Kobana access token:
@@ -92,6 +116,20 @@ curl -X POST https://api.kobana.com.br/v2/charge/pix \
 ```
 Use tool: create_charge_pix
 Parameters: {"amount": 100.00, "pix_account_uid": "...", "expire_at": "2026-02-01T12:00:00-03:00"}
+```
+
+### Create Pix Transfer (API)
+```bash
+curl -X POST https://api.kobana.com.br/v2/transfer/pix \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"amount": 100.00, "financial_account_uid": "...", "type": "key", "key_type": "email", "key": "recipient@example.com", "beneficiary": {"document_number": "111.222.333-44", "name": "João Silva"}}'
+```
+
+### Create Pix Transfer (MCP)
+```
+Use tool: create_transfer_pix
+Parameters: {"amount": 100.00, "financial_account_uid": "...", "type": "key", "key_type": "email", "key": "recipient@example.com", "beneficiary": {"document_number": "111.222.333-44", "name": "João Silva"}}
 ```
 
 ## About Kobana
