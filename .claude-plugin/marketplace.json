@@ -1,11 +1,11 @@
 {
-  "name": "anthropic-agent-skills",
+  "name": "kobana-agent-skills",
   "owner": {
-    "name": "Keith Lazuka",
-    "email": "klazuka@anthropic.com"
+    "name": "Kobana",
+    "email": "contato@kobana.com.br"
   },
   "metadata": {
-    "description": "Anthropic example skills",
+    "description": "Kobana skills para automação financeira e processamento de documentos",
     "version": "1.0.0"
   },
   "plugins": [
