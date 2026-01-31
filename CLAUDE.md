@@ -10,7 +10,9 @@ kobana-skills/
 │   ├── api-charge-pix/       # Pix charges via REST API
 │   ├── mcp-charge-pix/       # Pix charges via MCP Server
 │   ├── api-transfer-pix/     # Pix transfers via REST API
-│   └── mcp-transfer-pix/     # Pix transfers via MCP Server
+│   ├── mcp-transfer-pix/     # Pix transfers via MCP Server
+│   ├── api-payment-pix/      # Pix payments via REST API
+│   └── mcp-payment-pix/      # Pix payments via MCP Server
 ├── spec/                     # Agent Skills specification
 │   └── kobana-skills-structure.md  # Standard structure for new skills
 └── template/                 # Skill template
@@ -50,6 +52,16 @@ This guide includes:
 - **Purpose**: Create and manage Pix transfers using kobana-mcp-transfer MCP server
 - **Documentation**: `skills/mcp-transfer-pix/SKILL.md`
 - **Full Reference**: `skills/mcp-transfer-pix/references/REFERENCE.md`
+
+### api-payment-pix
+- **Purpose**: Pay Pix charges and decode QR codes using Kobana REST API
+- **Documentation**: `skills/api-payment-pix/SKILL.md`
+- **Full Reference**: `skills/api-payment-pix/references/REFERENCE.md`
+
+### mcp-payment-pix
+- **Purpose**: Pay Pix charges and decode QR codes using kobana-mcp-payment MCP server
+- **Documentation**: `skills/mcp-payment-pix/SKILL.md`
+- **Full Reference**: `skills/mcp-payment-pix/references/REFERENCE.md`
 
 ## External Documentation
 
@@ -98,6 +110,18 @@ This guide includes:
 - Want simplified tool-based interaction for transfers
 - Prefer not to handle HTTP requests directly
 
+### Use api-payment-pix when:
+- Making direct HTTP calls to Kobana API
+- Paying Pix charges (invoices, QR codes, copy-paste)
+- Need to decode Pix EMV before paying
+- Working without MCP server configured
+
+### Use mcp-payment-pix when:
+- MCP server is already configured
+- Using Claude Desktop or Claude Code with MCP
+- Want simplified tool-based interaction for Pix payments
+- Prefer not to handle HTTP requests directly
+
 ## Authentication
 
 Both skills require a Kobana access token:
@@ -132,6 +156,20 @@ curl -X POST https://api.kobana.com.br/v2/transfer/pix \
 ```
 Use tool: create_transfer_pix
 Parameters: {"amount": 100.00, "financial_account_uid": "...", "type": "key", "key_type": "email", "key": "recipient@example.com", "beneficiary": {"document_number": "111.222.333-44", "name": "João Silva"}}
+```
+
+### Pay Pix Charge (API)
+```bash
+curl -X POST https://api.kobana.com.br/v2/payment/pix \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"financial_account_uid": "...", "emv": "00020126580014br.gov.bcb.pix...", "amount": 150.00}'
+```
+
+### Pay Pix Charge (MCP)
+```
+Use tool: create_payment_pix
+Parameters: {"financial_account_uid": "...", "emv": "00020126580014br.gov.bcb.pix...", "amount": 150.00}
 ```
 
 ## About Kobana

@@ -18,7 +18,9 @@
         "./skills/api-charge-pix",
         "./skills/mcp-charge-pix",
         "./skills/api-transfer-pix",
-        "./skills/mcp-transfer-pix"
+        "./skills/mcp-transfer-pix",
+        "./skills/api-payment-pix",
+        "./skills/mcp-payment-pix"
       ]
     }
   ]
