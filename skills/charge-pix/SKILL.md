@@ -97,7 +97,21 @@ Parameters: { "uid": "019c0cbe-f018-717e-..." }
 
 ### MCP Server Setup
 
-Add to `.mcp.json` in your project root (Claude Code) or `~/Library/Application Support/Claude/claude_desktop_config.json` (Claude Desktop macOS):
+#### Claude Code
+
+If you installed the `kobana-agent-skills` plugin, the MCP servers are already configured. Just set the environment variable before running Claude Code:
+
+```bash
+export KOBANA_ACCESS_TOKEN="your_access_token"
+claude
+```
+
+For sandbox, also set:
+```bash
+export KOBANA_API_URL="https://api-sandbox.kobana.com.br"
+```
+
+Or add to `.mcp.json` in your project root:
 
 ```json
 {
@@ -113,7 +127,12 @@ Add to `.mcp.json` in your project root (Claude Code) or `~/Library/Application 
 }
 ```
 
-**Sandbox:**
+#### Claude Desktop
+
+Add to your config file:
+- **macOS**: `~/Library/Application Support/Claude/claude_desktop_config.json`
+- **Windows**: `%APPDATA%\Claude\claude_desktop_config.json`
+
 ```json
 {
   "mcpServers": {
@@ -121,15 +140,19 @@ Add to `.mcp.json` in your project root (Claude Code) or `~/Library/Application 
       "command": "npx",
       "args": ["-y", "kobana-mcp-charge"],
       "env": {
-        "KOBANA_ACCESS_TOKEN": "your_sandbox_token",
-        "KOBANA_API_URL": "https://api-sandbox.kobana.com.br"
+        "KOBANA_ACCESS_TOKEN": "your_access_token"
       }
     }
   }
 }
 ```
 
-**Remote MCP (Hosted):**
+> **Important:** Replace `your_access_token` with your actual Kobana API token. Claude Desktop does not support environment variable expansion (`${VAR}`) — you must paste the real token value directly.
+
+For sandbox, add `"KOBANA_API_URL": "https://api-sandbox.kobana.com.br"` to the `env` object.
+
+#### Remote MCP (Hosted)
+
 ```json
 {
   "mcpServers": {

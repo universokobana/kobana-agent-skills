@@ -30,6 +30,63 @@ A [Kobana](https://www.kobana.com.br) é uma plataforma de automação financeir
 | [transfer-pix](./skills/transfer-pix) | Criar e gerenciar transferências Pix e lotes |
 | [payment-pix](./skills/payment-pix) | Pagar cobranças Pix, decodificar QR codes e gerenciar lotes de pagamento |
 
+## Configuração dos Servidores MCP
+
+As skills utilizam servidores MCP da Kobana para a melhor experiência. A configuração depende do seu cliente:
+
+### Claude Code
+
+Se você instalar o plugin, os servidores MCP já vêm pré-configurados. Basta definir seu token antes de executar:
+
+```bash
+export KOBANA_ACCESS_TOKEN="seu_token_da_api_kobana"
+claude
+```
+
+Para ambiente sandbox:
+```bash
+export KOBANA_API_URL="https://api-sandbox.kobana.com.br"
+```
+
+### Claude Desktop
+
+O Claude Desktop **não suporta** expansão de variáveis de ambiente (`${VAR}`). Você precisa adicionar os servidores MCP manualmente no arquivo de configuração com o valor real do token:
+
+- **macOS**: `~/Library/Application Support/Claude/claude_desktop_config.json`
+- **Windows**: `%APPDATA%\Claude\claude_desktop_config.json`
+
+```json
+{
+  "mcpServers": {
+    "kobana-charge": {
+      "command": "npx",
+      "args": ["-y", "kobana-mcp-charge"],
+      "env": {
+        "KOBANA_ACCESS_TOKEN": "cole_seu_token_real_aqui"
+      }
+    },
+    "kobana-transfer": {
+      "command": "npx",
+      "args": ["-y", "kobana-mcp-transfer"],
+      "env": {
+        "KOBANA_ACCESS_TOKEN": "cole_seu_token_real_aqui"
+      }
+    },
+    "kobana-payment": {
+      "command": "npx",
+      "args": ["-y", "kobana-mcp-payment"],
+      "env": {
+        "KOBANA_ACCESS_TOKEN": "cole_seu_token_real_aqui"
+      }
+    }
+  }
+}
+```
+
+Adicione mais servidores conforme necessário: `kobana-mcp-financial`, `kobana-mcp-admin`, `kobana-mcp-data`, `kobana-mcp-edi`.
+
+Para sandbox, adicione `"KOBANA_API_URL": "https://api-sandbox.kobana.com.br"` ao `env` de cada servidor.
+
 ## Aviso Legal
 
 **Estas skills são fornecidas para fins de demonstração e educacionais.** Sempre teste as skills completamente em seu próprio ambiente antes de depender delas para tarefas críticas.

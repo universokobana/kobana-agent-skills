@@ -30,6 +30,63 @@ Each skill supports two modes: **MCP (preferred)** when the corresponding MCP se
 | [transfer-pix](./skills/transfer-pix) | Create and manage Pix transfers and batches |
 | [payment-pix](./skills/payment-pix) | Pay Pix charges, decode QR codes, and manage payment batches |
 
+## MCP Server Setup
+
+The skills use Kobana MCP servers for the best experience. Setup depends on your client:
+
+### Claude Code
+
+If you install the plugin, MCP servers are pre-configured. Just set your token before running:
+
+```bash
+export KOBANA_ACCESS_TOKEN="your_kobana_api_token"
+claude
+```
+
+For sandbox environment:
+```bash
+export KOBANA_API_URL="https://api-sandbox.kobana.com.br"
+```
+
+### Claude Desktop
+
+Claude Desktop **does not support** environment variable expansion (`${VAR}`). You must add the MCP servers manually to your config file with the real token value:
+
+- **macOS**: `~/Library/Application Support/Claude/claude_desktop_config.json`
+- **Windows**: `%APPDATA%\Claude\claude_desktop_config.json`
+
+```json
+{
+  "mcpServers": {
+    "kobana-charge": {
+      "command": "npx",
+      "args": ["-y", "kobana-mcp-charge"],
+      "env": {
+        "KOBANA_ACCESS_TOKEN": "paste_your_real_token_here"
+      }
+    },
+    "kobana-transfer": {
+      "command": "npx",
+      "args": ["-y", "kobana-mcp-transfer"],
+      "env": {
+        "KOBANA_ACCESS_TOKEN": "paste_your_real_token_here"
+      }
+    },
+    "kobana-payment": {
+      "command": "npx",
+      "args": ["-y", "kobana-mcp-payment"],
+      "env": {
+        "KOBANA_ACCESS_TOKEN": "paste_your_real_token_here"
+      }
+    }
+  }
+}
+```
+
+Add more servers as needed: `kobana-mcp-financial`, `kobana-mcp-admin`, `kobana-mcp-data`, `kobana-mcp-edi`.
+
+For sandbox, add `"KOBANA_API_URL": "https://api-sandbox.kobana.com.br"` to each server's `env`.
+
 ## Disclaimer
 
 **These skills are provided for demonstration and educational purposes only.** Always test skills thoroughly in your own environment before relying on them for critical tasks.
