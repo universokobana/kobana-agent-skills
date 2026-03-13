@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "Kobana skills para automação financeira e processamento de documentos",
-    "version": "1.0.0"
+    "version": "1.1.0"
   },
   "plugins": [
     {

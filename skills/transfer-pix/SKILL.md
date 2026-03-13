@@ -4,7 +4,7 @@ description: Guide for managing Pix transfers using Kobana. Use when the user wa
 license: Complete terms in LICENSE.txt
 metadata:
   author: Kobana
-  version: "2.0"
+  version: "1.1.0"
 ---
 
 # Kobana Transfer Pix Skill

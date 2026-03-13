@@ -4,7 +4,7 @@ description: Guide for managing Pix charges, accounts, and payments using Kobana
 license: Complete terms in LICENSE.txt
 metadata:
   author: Kobana
-  version: "3.0"
+  version: "1.1.0"
 ---
 
 # Kobana Charge Pix Skill

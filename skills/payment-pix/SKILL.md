@@ -4,7 +4,7 @@ description: Guide for paying Pix charges using Kobana. Use when the user wants 
 license: Complete terms in LICENSE.txt
 metadata:
   author: Kobana
-  version: "2.0"
+  version: "1.1.0"
 ---
 
 # Kobana Payment Pix Skill
