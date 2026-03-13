@@ -1,0 +1,12 @@
+{
+  "name": "kobana-agent-skills",
+  "description": "Kobana financial automation skills for Pix charges, transfers, and payments via REST API and MCP servers",
+  "version": "1.0.0",
+  "author": {
+    "name": "Kobana",
+    "email": "contato@kobana.com.br"
+  },
+  "homepage": "https://www.kobana.com.br",
+  "repository": "https://github.com/universokobana/kobana-agent-skills",
+  "license": "SEE LICENSE IN LICENSE.txt"
+}
