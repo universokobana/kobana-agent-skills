@@ -1,12 +1,70 @@
 {
   "name": "kobana-agent-skills",
-  "description": "Kobana financial automation skills for Pix charges, transfers, and payments via REST API and MCP servers",
-  "version": "1.0.0",
+  "description": "Kobana financial automation skills for Pix charges, transfers, and payments via MCP servers and REST API",
+  "version": "1.1.0",
   "author": {
     "name": "Kobana",
     "email": "contato@kobana.com.br"
   },
   "homepage": "https://www.kobana.com.br",
   "repository": "https://github.com/universokobana/kobana-agent-skills",
-  "license": "SEE LICENSE IN LICENSE.txt"
+  "license": "SEE LICENSE IN LICENSE.txt",
+  "mcpServers": {
+    "kobana-charge": {
+      "command": "npx",
+      "args": ["-y", "kobana-mcp-charge"],
+      "env": {
+        "KOBANA_ACCESS_TOKEN": "${KOBANA_ACCESS_TOKEN}",
+        "KOBANA_API_URL": "${KOBANA_API_URL}"
+      }
+    },
+    "kobana-transfer": {
+      "command": "npx",
+      "args": ["-y", "kobana-mcp-transfer"],
+      "env": {
+        "KOBANA_ACCESS_TOKEN": "${KOBANA_ACCESS_TOKEN}",
+        "KOBANA_API_URL": "${KOBANA_API_URL}"
+      }
+    },
+    "kobana-payment": {
+      "command": "npx",
+      "args": ["-y", "kobana-mcp-payment"],
+      "env": {
+        "KOBANA_ACCESS_TOKEN": "${KOBANA_ACCESS_TOKEN}",
+        "KOBANA_API_URL": "${KOBANA_API_URL}"
+      }
+    },
+    "kobana-financial": {
+      "command": "npx",
+      "args": ["-y", "kobana-mcp-financial"],
+      "env": {
+        "KOBANA_ACCESS_TOKEN": "${KOBANA_ACCESS_TOKEN}",
+        "KOBANA_API_URL": "${KOBANA_API_URL}"
+      }
+    },
+    "kobana-admin": {
+      "command": "npx",
+      "args": ["-y", "kobana-mcp-admin"],
+      "env": {
+        "KOBANA_ACCESS_TOKEN": "${KOBANA_ACCESS_TOKEN}",
+        "KOBANA_API_URL": "${KOBANA_API_URL}"
+      }
+    },
+    "kobana-data": {
+      "command": "npx",
+      "args": ["-y", "kobana-mcp-data"],
+      "env": {
+        "KOBANA_ACCESS_TOKEN": "${KOBANA_ACCESS_TOKEN}",
+        "KOBANA_API_URL": "${KOBANA_API_URL}"
+      }
+    },
+    "kobana-edi": {
+      "command": "npx",
+      "args": ["-y", "kobana-mcp-edi"],
+      "env": {
+        "KOBANA_ACCESS_TOKEN": "${KOBANA_ACCESS_TOKEN}",
+        "KOBANA_API_URL": "${KOBANA_API_URL}"
+      }
+    }
+  }
 }
