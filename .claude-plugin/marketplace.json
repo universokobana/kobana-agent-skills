@@ -11,15 +11,12 @@
   "plugins": [
     {
       "name": "kobana-agent-skills",
-      "description": "Kobana financial automation skills for Pix charges, transfers, and payments via REST API and MCP servers",
+      "description": "Kobana financial automation skills for Pix charges, transfers, and payments via MCP servers and REST API",
       "source": "./",
       "skills": [
-        "./skills/api-charge-pix",
-        "./skills/mcp-charge-pix",
-        "./skills/api-transfer-pix",
-        "./skills/mcp-transfer-pix",
-        "./skills/api-payment-pix",
-        "./skills/mcp-payment-pix"
+        "./skills/charge-pix",
+        "./skills/transfer-pix",
+        "./skills/payment-pix"
       ]
     }
   ]

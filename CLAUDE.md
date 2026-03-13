@@ -7,15 +7,12 @@ This repository contains Kobana's official skills for financial automation with 
 ```
 kobana-agent-skills/
 ├── skills/
-│   ├── api-charge-pix/       # Pix charges via REST API
-│   ├── mcp-charge-pix/       # Pix charges via MCP Server
-│   ├── api-transfer-pix/     # Pix transfers via REST API
-│   ├── mcp-transfer-pix/     # Pix transfers via MCP Server
-│   ├── api-payment-pix/      # Pix payments via REST API
-│   └── mcp-payment-pix/      # Pix payments via MCP Server
-├── spec/                     # Agent Skills specification
+│   ├── charge-pix/            # Pix charges (MCP + API)
+│   ├── transfer-pix/          # Pix transfers (MCP + API)
+│   └── payment-pix/           # Pix payments (MCP + API)
+├── spec/                      # Agent Skills specification
 │   └── kobana-agent-skills-structure.md  # Standard structure for new skills
-└── template/                 # Skill template
+└── template/                  # Skill template
 ```
 
 ## Creating New Skills
@@ -24,7 +21,7 @@ For developing new Kobana skills, follow the standard structure documented in:
 - **Structure Guide**: `spec/kobana-agent-skills-structure.md`
 
 This guide includes:
-- Directory structure for API-based and MCP-based skills
+- Directory structure for skills
 - Templates for SKILL.md and REFERENCE.md
 - Naming conventions
 - Checklist for new skill development
@@ -33,35 +30,23 @@ This guide includes:
 
 ## Available Skills
 
-### api-charge-pix
-- **Purpose**: Create and manage Pix charges using Kobana REST API
-- **Documentation**: `skills/api-charge-pix/SKILL.md`
-- **Full Reference**: `skills/api-charge-pix/references/REFERENCE.md`
+### charge-pix
+- **Purpose**: Create and manage Pix charges, accounts, and payments
+- **Modes**: MCP (kobana-mcp-charge) preferred, REST API fallback
+- **Documentation**: `skills/charge-pix/SKILL.md`
+- **Full Reference**: `skills/charge-pix/references/REFERENCE.md`
 
-### mcp-charge-pix
-- **Purpose**: Create and manage Pix charges using kobana-mcp-charge MCP server
-- **Documentation**: `skills/mcp-charge-pix/SKILL.md`
-- **Full Reference**: `skills/mcp-charge-pix/references/REFERENCE.md`
+### transfer-pix
+- **Purpose**: Create and manage Pix transfers and batches
+- **Modes**: MCP (kobana-mcp-transfer) preferred, REST API fallback
+- **Documentation**: `skills/transfer-pix/SKILL.md`
+- **Full Reference**: `skills/transfer-pix/references/REFERENCE.md`
 
-### api-transfer-pix
-- **Purpose**: Create and manage Pix transfers using Kobana REST API
-- **Documentation**: `skills/api-transfer-pix/SKILL.md`
-- **Full Reference**: `skills/api-transfer-pix/references/REFERENCE.md`
-
-### mcp-transfer-pix
-- **Purpose**: Create and manage Pix transfers using kobana-mcp-transfer MCP server
-- **Documentation**: `skills/mcp-transfer-pix/SKILL.md`
-- **Full Reference**: `skills/mcp-transfer-pix/references/REFERENCE.md`
-
-### api-payment-pix
-- **Purpose**: Pay Pix charges and decode QR codes using Kobana REST API
-- **Documentation**: `skills/api-payment-pix/SKILL.md`
-- **Full Reference**: `skills/api-payment-pix/references/REFERENCE.md`
-
-### mcp-payment-pix
-- **Purpose**: Pay Pix charges and decode QR codes using kobana-mcp-payment MCP server
-- **Documentation**: `skills/mcp-payment-pix/SKILL.md`
-- **Full Reference**: `skills/mcp-payment-pix/references/REFERENCE.md`
+### payment-pix
+- **Purpose**: Pay Pix charges, decode QR codes, and manage payment batches
+- **Modes**: MCP (kobana-mcp-payment) preferred, REST API fallback
+- **Documentation**: `skills/payment-pix/SKILL.md`
+- **Full Reference**: `skills/payment-pix/references/REFERENCE.md`
 
 ## External Documentation
 
@@ -86,49 +71,44 @@ This guide includes:
 
 ## When to Use Each Skill
 
-### Use api-charge-pix when:
-- Making direct HTTP calls to Kobana API
-- Integrating with backend systems
-- Need full control over API requests
-- Working without MCP server configured
+### Use charge-pix when:
+- Creating Pix charges (instant or billing)
+- Managing Pix accounts
+- Listing, updating, or canceling charges
+- Tracking charge payments and QR codes
 
-### Use mcp-charge-pix when:
-- MCP server is already configured
-- Using Claude Desktop or Claude Code with MCP
-- Want simplified tool-based interaction
-- Prefer not to handle HTTP requests directly
-
-### Use api-transfer-pix when:
-- Making direct HTTP calls to Kobana API
+### Use transfer-pix when:
 - Sending Pix transfers to suppliers, employees, or partners
-- Need full control over transfer batches and approvals
-- Working without MCP server configured
+- Managing transfer batches and approvals
+- Sending money to Pix keys or bank accounts
 
-### Use mcp-transfer-pix when:
-- MCP server is already configured
-- Using Claude Desktop or Claude Code with MCP
-- Want simplified tool-based interaction for transfers
-- Prefer not to handle HTTP requests directly
-
-### Use api-payment-pix when:
-- Making direct HTTP calls to Kobana API
+### Use payment-pix when:
 - Paying Pix charges (invoices, QR codes, copy-paste)
-- Need to decode Pix EMV before paying
-- Working without MCP server configured
+- Decoding Pix EMV before paying
+- Managing payment batches and approvals
 
-### Use mcp-payment-pix when:
-- MCP server is already configured
-- Using Claude Desktop or Claude Code with MCP
-- Want simplified tool-based interaction for Pix payments
-- Prefer not to handle HTTP requests directly
+## Operation Modes
+
+Each skill supports two modes:
+
+1. **MCP (preferred)** — If the corresponding MCP server is configured, use MCP tools directly
+2. **REST API (fallback)** — If MCP is not available, use HTTP calls to the Kobana API
+
+> Skills should always try MCP tools first and only fall back to the REST API if MCP is not available.
 
 ## Authentication
 
-Both skills require a Kobana access token:
-- **API**: Pass via `Authorization: Bearer {token}` header
+Both modes require a Kobana access token:
 - **MCP**: Configure via `KOBANA_ACCESS_TOKEN` environment variable
+- **API**: Pass via `Authorization: Bearer {token}` header
 
 ## Quick Commands
+
+### Create Pix Charge (MCP)
+```
+Use tool: create_charge_pix
+Parameters: {"amount": 100.00, "pix_account_uid": "...", "expire_at": "2026-02-01T12:00:00-03:00"}
+```
 
 ### Create Pix Charge (API)
 ```bash
@@ -138,10 +118,10 @@ curl -X POST https://api.kobana.com.br/v2/charge/pix \
   -d '{"amount": 100.00, "pix_account_uid": "...", "expire_at": "2026-02-01T12:00:00-03:00"}'
 ```
 
-### Create Pix Charge (MCP)
+### Create Pix Transfer (MCP)
 ```
-Use tool: create_charge_pix
-Parameters: {"amount": 100.00, "pix_account_uid": "...", "expire_at": "2026-02-01T12:00:00-03:00"}
+Use tool: create_transfer_pix
+Parameters: {"amount": 100.00, "financial_account_uid": "...", "type": "key", "key_type": "email", "key": "recipient@example.com", "beneficiary": {"document_number": "111.222.333-44", "name": "João Silva"}}
 ```
 
 ### Create Pix Transfer (API)
@@ -152,10 +132,10 @@ curl -X POST https://api.kobana.com.br/v2/transfer/pix \
   -d '{"amount": 100.00, "financial_account_uid": "...", "type": "key", "key_type": "email", "key": "recipient@example.com", "beneficiary": {"document_number": "111.222.333-44", "name": "João Silva"}}'
 ```
 
-### Create Pix Transfer (MCP)
+### Pay Pix Charge (MCP)
 ```
-Use tool: create_transfer_pix
-Parameters: {"amount": 100.00, "financial_account_uid": "...", "type": "key", "key_type": "email", "key": "recipient@example.com", "beneficiary": {"document_number": "111.222.333-44", "name": "João Silva"}}
+Use tool: create_payment_pix
+Parameters: {"financial_account_uid": "...", "emv": "00020126580014br.gov.bcb.pix...", "amount": 150.00}
 ```
 
 ### Pay Pix Charge (API)
@@ -164,12 +144,6 @@ curl -X POST https://api.kobana.com.br/v2/payment/pix \
   -H "Authorization: Bearer $TOKEN" \
   -H "Content-Type: application/json" \
   -d '{"financial_account_uid": "...", "emv": "00020126580014br.gov.bcb.pix...", "amount": 150.00}'
-```
-
-### Pay Pix Charge (MCP)
-```
-Use tool: create_payment_pix
-Parameters: {"financial_account_uid": "...", "emv": "00020126580014br.gov.bcb.pix...", "amount": 150.00}
 ```
 
 ## About Kobana

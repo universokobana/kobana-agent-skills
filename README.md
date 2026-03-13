@@ -16,6 +16,8 @@ For more information, check out:
 
 This repository contains Kobana's official skills for financial automation with Claude. These skills help you interact with Kobana's APIs and MCP servers for Pix charges, payments, and financial operations.
 
+Each skill supports two modes: **MCP (preferred)** when the corresponding MCP server is configured, and **REST API (fallback)** when it's not.
+
 ## About Kobana
 
 [Kobana](https://www.kobana.com.br) is a financial automation platform that connects businesses to over 40 Brazilian banks through a unified API. With more than R$ 50 billion in processed transactions and 5+ million monthly banking operations, Kobana offers payment, collection, and transfer solutions with native AI integration.
@@ -24,12 +26,9 @@ This repository contains Kobana's official skills for financial automation with 
 
 | Skill | Description |
 |-------|-------------|
-| [api-charge-pix](./skills/api-charge-pix) | Create and manage Pix charges using Kobana REST API |
-| [mcp-charge-pix](./skills/mcp-charge-pix) | Create and manage Pix charges using kobana-mcp-charge MCP server |
-| [api-transfer-pix](./skills/api-transfer-pix) | Create and manage Pix transfers using Kobana REST API |
-| [mcp-transfer-pix](./skills/mcp-transfer-pix) | Create and manage Pix transfers using kobana-mcp-transfer MCP server |
-| [api-payment-pix](./skills/api-payment-pix) | Pay Pix charges and decode QR codes using Kobana REST API |
-| [mcp-payment-pix](./skills/mcp-payment-pix) | Pay Pix charges and decode QR codes using kobana-mcp-payment MCP server |
+| [charge-pix](./skills/charge-pix) | Create and manage Pix charges, accounts, and payments |
+| [transfer-pix](./skills/transfer-pix) | Create and manage Pix transfers and batches |
+| [payment-pix](./skills/payment-pix) | Pay Pix charges, decode QR codes, and manage payment batches |
 
 ## Disclaimer
 
@@ -39,7 +38,7 @@ This repository contains Kobana's official skills for financial automation with 
 
 - [./skills](./skills): Kobana financial automation skills
 - [./spec](./spec): The Agent Skills specification
-  - [Kobana Agent Skills Structure](./spec/kobana-agent-skills-structure.md): Standard structure for API and MCP-based skills
+  - [Kobana Agent Skills Structure](./spec/kobana-agent-skills-structure.md): Standard structure for skills
 - [./template](./template): Skill template
 
 # Try in Claude Code, Claude.ai, and the API
@@ -63,12 +62,12 @@ Alternatively, directly install via:
 ```
 
 After installing the plugin, you can use the skill by just mentioning it. For example:
-- "Use the api-charge-pix skill to create a Pix charge of R$ 100.00"
-- "Use the mcp-charge-pix skill to list my Pix accounts"
-- "Use the api-transfer-pix skill to send a Pix transfer of R$ 500.00"
-- "Use the mcp-transfer-pix skill to create a transfer batch"
-- "Use the api-payment-pix skill to pay a Pix QR code"
-- "Use the mcp-payment-pix skill to decode and pay a Pix invoice"
+- "Use the charge-pix skill to create a Pix charge of R$ 100.00"
+- "Use the charge-pix skill to list my Pix accounts"
+- "Use the transfer-pix skill to send a Pix transfer of R$ 500.00"
+- "Use the transfer-pix skill to create a transfer batch"
+- "Use the payment-pix skill to pay a Pix QR code"
+- "Use the payment-pix skill to decode and pay a Pix invoice"
 
 ## Claude.ai
 

@@ -16,6 +16,8 @@ Para mais informações:
 
 Este repositório contém as skills oficiais da Kobana para automação financeira com Claude. Estas skills ajudam você a interagir com as APIs e servidores MCP da Kobana para cobranças Pix, pagamentos e operações financeiras.
 
+Cada skill suporta dois modos: **MCP (preferido)** quando o servidor MCP correspondente está configurado, e **API REST (fallback)** quando não está.
+
 ## Sobre a Kobana
 
 A [Kobana](https://www.kobana.com.br) é uma plataforma de automação financeira que conecta empresas a mais de 40 bancos brasileiros através de uma API unificada. Com mais de R$ 50 bilhões em transações processadas e 5+ milhões de operações bancárias mensais, a Kobana oferece soluções de recebimento, pagamento e transferência com IA nativa integrada.
@@ -24,12 +26,9 @@ A [Kobana](https://www.kobana.com.br) é uma plataforma de automação financeir
 
 | Skill | Descrição |
 |-------|-----------|
-| [api-charge-pix](./skills/api-charge-pix) | Criar e gerenciar cobranças Pix usando a API REST da Kobana |
-| [mcp-charge-pix](./skills/mcp-charge-pix) | Criar e gerenciar cobranças Pix usando o servidor MCP kobana-mcp-charge |
-| [api-transfer-pix](./skills/api-transfer-pix) | Criar e gerenciar transferências Pix usando a API REST da Kobana |
-| [mcp-transfer-pix](./skills/mcp-transfer-pix) | Criar e gerenciar transferências Pix usando o servidor MCP kobana-mcp-transfer |
-| [api-payment-pix](./skills/api-payment-pix) | Pagar cobranças Pix e decodificar QR codes usando a API REST da Kobana |
-| [mcp-payment-pix](./skills/mcp-payment-pix) | Pagar cobranças Pix e decodificar QR codes usando o servidor MCP kobana-mcp-payment |
+| [charge-pix](./skills/charge-pix) | Criar e gerenciar cobranças Pix, contas e pagamentos |
+| [transfer-pix](./skills/transfer-pix) | Criar e gerenciar transferências Pix e lotes |
+| [payment-pix](./skills/payment-pix) | Pagar cobranças Pix, decodificar QR codes e gerenciar lotes de pagamento |
 
 ## Aviso Legal
 
@@ -62,12 +61,12 @@ Alternativamente, instale diretamente via:
 ```
 
 Após instalar o plugin, você pode usar a skill apenas mencionando-a. Por exemplo:
-- "Use a skill api-charge-pix para criar uma cobrança Pix de R$ 100,00"
-- "Use a skill mcp-charge-pix para listar minhas contas Pix"
-- "Use a skill api-transfer-pix para enviar uma transferência Pix de R$ 500,00"
-- "Use a skill mcp-transfer-pix para criar um lote de transferências"
-- "Use a skill api-payment-pix para pagar um QR code Pix"
-- "Use a skill mcp-payment-pix para decodificar e pagar uma fatura Pix"
+- "Use a skill charge-pix para criar uma cobrança Pix de R$ 100,00"
+- "Use a skill charge-pix para listar minhas contas Pix"
+- "Use a skill transfer-pix para enviar uma transferência Pix de R$ 500,00"
+- "Use a skill transfer-pix para criar um lote de transferências"
+- "Use a skill payment-pix para pagar um QR code Pix"
+- "Use a skill payment-pix para decodificar e pagar uma fatura Pix"
 
 ## Claude.ai
 
