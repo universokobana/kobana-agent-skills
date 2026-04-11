@@ -20,61 +20,29 @@
         "./skills/payment-pix"
       ],
       "mcpServers": {
-        "kobana-charge": {
-          "command": "npx",
-          "args": ["-y", "kobana-mcp-charge"],
-          "env": {
-            "KOBANA_ACCESS_TOKEN": "${KOBANA_ACCESS_TOKEN}",
-            "KOBANA_API_URL": "${KOBANA_API_URL}"
-          }
+        "Kobana Admin": {
+          "url": "https://mcp.kobana.com.br/admin/mcp"
         },
-        "kobana-transfer": {
-          "command": "npx",
-          "args": ["-y", "kobana-mcp-transfer"],
-          "env": {
-            "KOBANA_ACCESS_TOKEN": "${KOBANA_ACCESS_TOKEN}",
-            "KOBANA_API_URL": "${KOBANA_API_URL}"
-          }
+        "Kobana Charge": {
+          "url": "https://mcp.kobana.com.br/charge/mcp"
         },
-        "kobana-payment": {
-          "command": "npx",
-          "args": ["-y", "kobana-mcp-payment"],
-          "env": {
-            "KOBANA_ACCESS_TOKEN": "${KOBANA_ACCESS_TOKEN}",
-            "KOBANA_API_URL": "${KOBANA_API_URL}"
-          }
+        "Kobana Data": {
+          "url": "https://mcp.kobana.com.br/data/mcp"
         },
-        "kobana-financial": {
-          "command": "npx",
-          "args": ["-y", "kobana-mcp-financial"],
-          "env": {
-            "KOBANA_ACCESS_TOKEN": "${KOBANA_ACCESS_TOKEN}",
-            "KOBANA_API_URL": "${KOBANA_API_URL}"
-          }
+        "Kobana EDI": {
+          "url": "https://mcp.kobana.com.br/edi/mcp"
         },
-        "kobana-admin": {
-          "command": "npx",
-          "args": ["-y", "kobana-mcp-admin"],
-          "env": {
-            "KOBANA_ACCESS_TOKEN": "${KOBANA_ACCESS_TOKEN}",
-            "KOBANA_API_URL": "${KOBANA_API_URL}"
-          }
+        "Kobana Financial": {
+          "url": "https://mcp.kobana.com.br/financial/mcp"
         },
-        "kobana-data": {
-          "command": "npx",
-          "args": ["-y", "kobana-mcp-data"],
-          "env": {
-            "KOBANA_ACCESS_TOKEN": "${KOBANA_ACCESS_TOKEN}",
-            "KOBANA_API_URL": "${KOBANA_API_URL}"
-          }
+        "Kobana Mailbox": {
+          "url": "https://mcp.kobana.com.br/mailbox/mcp"
         },
-        "kobana-edi": {
-          "command": "npx",
-          "args": ["-y", "kobana-mcp-edi"],
-          "env": {
-            "KOBANA_ACCESS_TOKEN": "${KOBANA_ACCESS_TOKEN}",
-            "KOBANA_API_URL": "${KOBANA_API_URL}"
-          }
+        "Kobana Payment": {
+          "url": "https://mcp.kobana.com.br/payment/mcp"
+        },
+        "Kobana Transfer": {
+          "url": "https://mcp.kobana.com.br/transfer/mcp"
         }
       }
     }
