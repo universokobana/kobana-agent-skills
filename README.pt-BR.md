@@ -32,60 +32,38 @@ A [Kobana](https://www.kobana.com.br) é uma plataforma de automação financeir
 
 ## Configuração dos Servidores MCP
 
-As skills utilizam servidores MCP da Kobana para a melhor experiência. A configuração depende do seu cliente:
+As skills utilizam os **servidores MCP remotos** hospedados pela Kobana. Cada endpoint em `https://mcp.kobana.com.br/{namespace}/mcp` implementa OAuth 2.1 + PKCE + Dynamic Client Registration, então o cliente negocia a autenticação no navegador — você nunca precisa colar client id, secret ou token estático.
+
+### Endpoints remotos
+
+| Namespace | URL |
+|---|---|
+| Admin     | `https://mcp.kobana.com.br/admin/mcp` |
+| Charge    | `https://mcp.kobana.com.br/charge/mcp` |
+| Data      | `https://mcp.kobana.com.br/data/mcp` |
+| EDI       | `https://mcp.kobana.com.br/edi/mcp` |
+| Financial | `https://mcp.kobana.com.br/financial/mcp` |
+| Mailbox   | `https://mcp.kobana.com.br/mailbox/mcp` |
+| Payment   | `https://mcp.kobana.com.br/payment/mcp` |
+| Transfer  | `https://mcp.kobana.com.br/transfer/mcp` |
+
+> Para o sandbox, troque `mcp.kobana.com.br` por `mcp-sandbox.kobana.com.br`.
 
 ### Claude Code
 
-Se você instalar o plugin, os servidores MCP já vêm pré-configurados. Basta definir seu token antes de executar:
+Quando você instala o plugin deste marketplace, os servidores MCP remotos já vêm pré-configurados automaticamente — não é preciso editar nenhum arquivo nem definir variável de ambiente. No primeiro uso de uma ferramenta, o Claude Code abre o navegador para você completar o login OAuth da Kobana.
+
+Se preferir registrar os servidores manualmente, use o comando `claude mcp add` com `--transport http`:
 
 ```bash
-export KOBANA_ACCESS_TOKEN="seu_token_da_api_kobana"
-claude
-```
-
-Para ambiente sandbox:
-```bash
-export KOBANA_API_URL="https://api-sandbox.kobana.com.br"
+claude mcp add --transport http kobana-financial https://mcp.kobana.com.br/financial/mcp
 ```
 
 ### Claude Desktop
 
-O Claude Desktop **não suporta** expansão de variáveis de ambiente (`${VAR}`). Você precisa adicionar os servidores MCP manualmente no arquivo de configuração com o valor real do token:
+Settings → **Connectors → Add Custom Connector**. Cole a URL do namespace desejado, deixe os campos avançados vazios, clique em **Add** e complete o login Kobana na janela do navegador que abrir. Repita para cada namespace que precisar.
 
-- **macOS**: `~/Library/Application Support/Claude/claude_desktop_config.json`
-- **Windows**: `%APPDATA%\Claude\claude_desktop_config.json`
-
-```json
-{
-  "mcpServers": {
-    "kobana-charge": {
-      "command": "npx",
-      "args": ["-y", "kobana-mcp-charge"],
-      "env": {
-        "KOBANA_ACCESS_TOKEN": "cole_seu_token_real_aqui"
-      }
-    },
-    "kobana-transfer": {
-      "command": "npx",
-      "args": ["-y", "kobana-mcp-transfer"],
-      "env": {
-        "KOBANA_ACCESS_TOKEN": "cole_seu_token_real_aqui"
-      }
-    },
-    "kobana-payment": {
-      "command": "npx",
-      "args": ["-y", "kobana-mcp-payment"],
-      "env": {
-        "KOBANA_ACCESS_TOKEN": "cole_seu_token_real_aqui"
-      }
-    }
-  }
-}
-```
-
-Adicione mais servidores conforme necessário: `kobana-mcp-financial`, `kobana-mcp-admin`, `kobana-mcp-data`, `kobana-mcp-edi`.
-
-Para sandbox, adicione `"KOBANA_API_URL": "https://api-sandbox.kobana.com.br"` ao `env` de cada servidor.
+Para instruções de setup em outros clientes (Claude.ai web, ChatGPT, Cursor, VS Code, Windsurf, Manus, Perplexity), veja o [README do kobana-mcp-servers](https://github.com/universokobana/kobana-mcp-servers#using-with-mcp-clients).
 
 ## Aviso Legal
 

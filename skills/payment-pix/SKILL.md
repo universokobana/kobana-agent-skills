@@ -1,7 +1,7 @@
 ---
 name: payment-pix
 description: Guide for paying Pix charges using Kobana. Use when the user wants to pay Pix invoices, decode QR codes, or manage Pix payments from financial accounts. Supports both MCP tools (preferred) and REST API.
-license: Complete terms in LICENSE.md
+license: Complete terms in LICENSE
 metadata:
   author: Kobana
   version: "1.1.0"

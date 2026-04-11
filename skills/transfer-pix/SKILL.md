@@ -1,7 +1,7 @@
 ---
 name: transfer-pix
 description: Guide for managing Pix transfers using Kobana. Use when the user wants to create, list, get, or cancel Pix transfers, manage transfer batches, or handle financial accounts. Supports both MCP tools (preferred) and REST API.
-license: Complete terms in LICENSE.md
+license: Complete terms in LICENSE
 metadata:
   author: Kobana
   version: "1.1.0"

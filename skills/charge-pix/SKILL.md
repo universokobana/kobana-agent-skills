@@ -1,7 +1,7 @@
 ---
 name: charge-pix
 description: Guide for managing Pix charges, accounts, and payments using Kobana. Use when the user wants to create, list, update, or cancel Pix charges, manage Pix accounts, or handle charge payments. Supports both MCP tools (preferred) and REST API.
-license: Complete terms in LICENSE.md
+license: Complete terms in LICENSE
 metadata:
   author: Kobana
   version: "1.1.0"
