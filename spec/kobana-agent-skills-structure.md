@@ -8,7 +8,7 @@ Este documento define a estrutura padrão para desenvolvimento de skills Kobana.
 skills/
 └── {namespace}/               # Skill unificada (MCP + API)
     ├── SKILL.md               # Instruções principais (obrigatório)
-    ├── LICENSE.txt            # Licença (obrigatório)
+    ├── LICENSE.md             # Licença (obrigatório)
     └── references/
         └── REFERENCE.md       # Referência técnica completa
 ```
@@ -34,7 +34,7 @@ O `{namespace}` deve seguir o padrão:
 ---
 name: {namespace}
 description: Guide for [descrição]. Use when the user wants to [casos de uso]. Supports both MCP tools (preferred) and REST API.
-license: Complete terms in LICENSE.txt
+license: Complete terms in LICENSE.md
 metadata:
   author: Kobana
   version: "X.Y"
@@ -47,7 +47,7 @@ metadata:
 ---
 name: {namespace}
 description: Guide for managing [recursos] using Kobana. Use when the user wants to [lista de ações]. Supports both MCP tools (preferred) and REST API.
-license: Complete terms in LICENSE.txt
+license: Complete terms in LICENSE.md
 metadata:
   author: Kobana
   version: "1.0"
@@ -333,7 +333,7 @@ DELETE /v2/{path}/{uid}
 ### Arquivos Obrigatórios
 
 - [ ] `SKILL.md` com frontmatter válido
-- [ ] `LICENSE.txt` com termos de licença
+- [ ] `LICENSE.md` com termos de licença
 - [ ] `references/REFERENCE.md` com documentação completa
 
 ### Conteúdo do SKILL.md
